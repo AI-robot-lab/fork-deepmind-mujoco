@@ -339,7 +339,7 @@ Na potrzeby edukacji, stwórzmy uproszczony model humanoidalny inspirowany Unitr
 
 ### Zapisz model
 
-Zapisz powyższy kod jako `/home/runner/work/deepmind-mujoco/deepmind-mujoco/model/unitree_g1/unitree_g1_simplified.xml`
+Zapisz powyższy kod jako `model/unitree_g1/unitree_g1_simplified.xml` w katalogu głównym repozytorium MuJoCo.
 
 ## Podstawowe operacje
 

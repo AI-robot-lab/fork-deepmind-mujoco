@@ -137,13 +137,16 @@ class PDController:
             joint_id = self.model.actuator_trnid[i, 0]
             
             # UWAGA: qpos i qvel mają różne indeksowanie!
-            # Pierwsze 7 elementów qpos to freejoint (3 pos + 4 quat)
-            # Pierwsze 6 elementów qvel to freejoint (3 vel + 3 angular vel)
+            # Używamy dedykowanych tablic adresów z modelu (poprawna metoda)
+            # jnt_qposadr - tablica adresów startowych pozycji dla każdego stawu
+            # jnt_dofadr - tablica adresów startowych DOF dla każdego stawu
             
-            # Dla uproszczenia, używamy offsetu
-            # W prawdziwej aplikacji trzeba uwzględnić strukturę stawów
-            qpos_idx = 7 + joint_id  # Offset dla freejoint w qpos
-            qvel_idx = 6 + joint_id  # Offset dla freejoint w qvel
+            # Pobierz poprawne indeksy z modelu
+            if joint_id < self.model.njnt:
+                qpos_idx = self.model.jnt_qposadr[joint_id]
+                qvel_idx = self.model.jnt_dofadr[joint_id]
+            else:
+                continue  # Pomiń jeśli joint_id jest nieprawidłowy
             
             if qpos_idx < len(data.qpos) and qvel_idx < len(data.qvel):
                 # Aktualny stan stawu
